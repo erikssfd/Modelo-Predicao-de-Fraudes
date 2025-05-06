@@ -1,50 +1,123 @@
-# Descrição do Modelo de Machine Learning: Detecção de Fraudes no Setor de Empréstimos
+💸 Detecção de Fraudes em Empréstimos com Machine Learning
 
-# 1. Definição do Problema:
 
- ###   O objetivo principal é desenvolver um modelo capaz de identificar possíveis fraudes no setor de empréstimos, visando reduzir as perdas financeiras e fortalecer a segurança nas transações.
+Este projeto visa a construção de um modelo de Machine Learning capaz de detectar fraudes em solicitações de empréstimos, com o objetivo de reduzir perdas financeiras e reforçar a segurança em instituições financeiras.
+🔍 1. Problema
 
-# 2. Coleta de Dados:
+Fraudes em empréstimos representam um risco significativo para instituições financeiras. Este projeto tem como objetivo identificar transações suspeitas de fraude, utilizando dados históricos e técnicas avançadas de aprendizado de máquina.
+📊 2. Coleta de Dados
 
-###    Os dados foram obtidos a partir de registros de transações de empréstimos anteriores, incluindo informações sobre clientes, histórico de transações, e indicadores de comportamento suspeito.
+Os dados foram extraídos de registros reais e simulados de empréstimos, contendo:
 
-# 3. Exploração e Análise de Dados:
+    Informações de clientes
 
-  ###  Realizamos uma análise exploratória para entender a distribuição das variáveis, identificar padrões de comportamento típicos e atípicos, além de explorar relações entre variáveis que possam indicar atividades fraudulentas.
+    Histórico de transações
 
-# 4. Pré-processamento de Dados:
+    Indicadores de comportamento suspeito
 
- ###   Tratamos valores ausentes e realizamos técnicas específicas para lidar com desequilíbrio de classes, comum em problemas de detecção de fraudes.
- ###   Normalizamos e escalamos as variáveis para garantir que o modelo seja robusto a diferentes escalas.
+📈 3. Exploração de Dados
 
-# 5. Divisão dos Dados:
+Realizamos análises exploratórias (EDA) para:
 
-  ###  Os dados foram divididos em conjuntos de treinamento e teste, com atenção especial para manter a proporção adequada de exemplos de fraudes e não fraudes em ambos os conjuntos.
+    Entender a distribuição das variáveis
 
-# 6. Escolha do Modelo:
+    Identificar padrões atípicos
 
- ###   Optamos por utilizar um modelo de classificação, como Random Forest ou Support Vector Machine, dada a natureza do problema de detecção de fraudes.
+    Encontrar correlações entre variáveis relevantes
 
-# 7. Treinamento do Modelo:
+📌 Exemplos de insights:
 
- ###   O modelo foi treinado no conjunto de treinamento, ajustando seus parâmetros para maximizar a sensibilidade na detecção de fraudes, minimizando falsos negativos.
+# Exemplo: Verificação da correlação entre variáveis
+import seaborn as sns
+sns.heatmap(df.corr(), cmap='coolwarm')
 
-# 8. Avaliação do Modelo:
+🧹 4. Pré-processamento
 
-  ###  Avaliamos o desempenho do modelo no conjunto de teste, utilizando métricas como precisão.
+    Tratamento de valores ausentes
 
-# 9. Ajuste do Modelo (Otimização):
+    Normalização de variáveis numéricas
 
-  ###  Realizamos ajustes finos nos parâmetros do modelo, considerando o trade-off entre a sensibilidade na detecção de fraudes e a especificidade na identificação de transações legítimas.
+    Codificação de variáveis categóricas
 
-# 10. Validação do Modelo:
+    Correção de desbalanceamento usando Oversampling (SMOTE) ou Undersampling
 
-  ###  Validamos o modelo com novos dados simulando casos de fraude para garantir que ele seja capaz de generalizar para situações não vistas durante o treinamento.
 
-# 11. Implantação do Modelo:
+🧪 5. Divisão dos Dados
 
- ###   Implementamos o modelo em um sistema de monitoramento em tempo real para avaliar transações em tempo real, auxiliando na tomada de decisões instantâneas sobre a autenticidade das transações.
+Dividimos o dataset em:
 
-# 12. Monitoramento e Manutenção:
+    Treinamento: 80%
 
-  ###  Estabelecemos um sistema de monitoramento contínuo para acompanhar o desempenho do modelo em produção, atualizando-o conforme necessário para adaptar-se a padrões de fraude em constante evolução.
+    Teste: 20%
+
+Mantendo a proporção de fraudes para evitar viés.
+🤖 6. Escolha do Modelo
+
+Modelos de classificação utilizados:
+
+    🌲 Random Forest
+
+    📈 Support Vector Machine (SVM)
+
+    (Testamos também XGBoost para comparação)
+
+🧠 7. Treinamento
+
+Treinamos os modelos com foco em alta sensibilidade (Recall), para minimizar falsos negativos (fraudes não detectadas).
+
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+
+🧾 8. Avaliação do Modelo
+
+Avaliamos os modelos usando:
+
+    Acurácia
+
+    Precisão
+
+    Recall (Sensibilidade)
+
+    F1-Score
+
+    Matriz de Confusão
+
+🛠️ 9. Ajuste de Hiperparâmetros
+
+Utilizamos Grid Search e Cross Validation para otimizar o desempenho, balanceando o Recall (fraudes detectadas) com a Especificidade (falsos positivos evitados).
+📦 10. Validação com Novos Dados
+
+Testamos o modelo com dados simulados de novas fraudes para verificar sua capacidade de generalização para padrões não vistos durante o treinamento.
+🚀 11. Implantação
+
+O modelo foi integrado a um sistema de monitoramento em tempo real, que:
+
+    Analisa transações no momento da solicitação
+
+    Classifica como "Fraude" ou "Legítima"
+
+    Aciona alertas automáticos em caso de suspeita
+
+📉 12. Monitoramento e Atualização
+
+Implementamos um pipeline de monitoramento contínuo que:
+
+    Acompanha o desempenho do modelo em produção
+
+    Coleta feedback humano para reavaliação
+
+    Atualiza o modelo periodicamente para novos padrões de fraude
+
+📚 Referências
+
+    Scikit-Learn
+
+    SMOTE - Imbalanced Learn
+
+    Credit Fraud Detection Datasets - Kaggle
+
+✅ Resumo Final
+
+Este projeto fornece uma base robusta para instituições financeiras que desejam automatizar a detecção de fraudes e proteger seus ativos. A aplicação de Machine Learning em tempo real permite respostas rápidas e precisas, reduzindo riscos e otimizando a operação.
